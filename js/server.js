@@ -1,6 +1,12 @@
 const express = require('express')
 const app = express()
 const bcrypt = require('bcrypt')
+const passport = require('passport')
+
+const initializePassport = require('./passport-config')
+initializePassport(passport, async email => {
+  return User.find({ email: email })
+})
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true })
 mongoose.connection.once('open', () => console.log('connected'))
@@ -37,7 +43,7 @@ app.post('/users/register', async (req, res) => {
   }
 })
 
-app.post('/users/login', async (req, res) => {
+app.login('/users/login', async (req, res) => {
   const user = users.find(user => user.name = req.body.name)
   if (user == null) {
     return res.status(400).send('Cannot find user')
