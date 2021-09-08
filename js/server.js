@@ -7,7 +7,7 @@ const app = express()
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const flash = require('express-flash')
-const flash = require('express-session')
+const session = require('express-session')
 
 const initializePassport = require('./passport-config')
 initializePassport(
