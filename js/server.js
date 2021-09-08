@@ -28,7 +28,7 @@ app.post('/users/register', async (req, res) => {
     const user = new User({ username: req.body.username, email: req.body.email, password: hashedPassword })
 
     user.save(function (err) {
-      if (err) console.log('cought a penis post')
+      if (err) console.log(err)
     })
 
     res.status(201).send()
