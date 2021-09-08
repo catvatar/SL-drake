@@ -1,12 +1,20 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const express = require('express')
 const app = express()
 const bcrypt = require('bcrypt')
 const passport = require('passport')
+const flash = require('express-flash')
+const flash = require('express-session')
 
 const initializePassport = require('./passport-config')
-initializePassport(passport, async email => {
-  return User.find({ email: email })
-})
+initializePassport(
+  passport,
+  async email => User.find({ email: email }),
+  async id => User.find({ _id: id })
+)
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true })
 mongoose.connection.once('open', () => console.log('connected'))
@@ -14,7 +22,14 @@ mongoose.connection.once('open', () => console.log('connected'))
 const User = require('./data/users.js')
 
 app.use(express.json())
-
+app.use(flash())
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.get('/users', async (req, res) => {
   try {
@@ -43,20 +58,8 @@ app.post('/users/register', async (req, res) => {
   }
 })
 
-app.get('/users/login', async (req, res) => {
-  const user = users.find(user => user.name = req.body.name)
-  if (user == null) {
-    return res.status(400).send('Cannot find user')
-  }
-  try {
-    if (await bcrypt.compare(req.body.password, user.password)) {
-      res.send('Success')
-    } else {
-      res.send('Not Allowed')
-    }
-  } catch {
-    res.status(500).send()
-  }
-})
+app.post('/users/login', passport.authenticate('local', {
+  failureFlash: true
+}))
 
 app.listen(3000)
