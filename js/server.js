@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/mybrary', { useNewUrlParser: true })
 mongoose.connection.once('open', () => console.log('not connected'))
 
 const User = require('./data/users.js')
