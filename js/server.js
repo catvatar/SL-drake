@@ -1,23 +1,41 @@
 const express = require('express')
 const app = express()
 const bcrypt = require('bcrypt')
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost:27017/mybrary', { useNewUrlParser: true })
+mongoose.connection.once('open', () => console.log('not connected'))
+
+const User = require('./data/users.js')
 
 app.use(express.json())
 
+
+
 const users = []
 
-app.get('/users', (req, res) => {
-  res.json(users)
+app.get('/users', async (req, res) => {
+  try {
+    const users = await User.find()
+    res.json(users)
+  } catch {
+    console.log('cought a penis')
+    res.status(500).send()
+  }
+
 })
 
-app.post('/users', async (req, res) => {
+app.post('/users/register', async (req, res) => {
   try {
-    const salt = await bcrypt.genSalt()
-    const hashedPassword = await bcrypt.hash(req.body.password, salt)
-    console.log(salt)
-    console.log(hashedPassword)
-    const user = { name: req.body.name, password: hashedPassword }
-    users.push(user)
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+
+    const user = new User({ username: req.body.username, email: req.body.email, password: hashedPassword })
+
+    try {
+      const newUser = await user.save()
+    } catch {
+      console.log('cought a penis')
+    }
+
     res.status(201).send()
   } catch {
     res.status(500).send()
