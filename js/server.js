@@ -59,6 +59,9 @@ app.post('/users/register', async (req, res) => {
 })
 
 app.post('/users/login', passport.authenticate('local', {
+  function(req, res) {
+    res.status(100).send()
+  },
   failureFlash: true
 }))
 
