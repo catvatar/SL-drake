@@ -25,7 +25,7 @@ app.post('/users/register', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
-    const user = new User({ username: req.body.username, email: req.body.email, password: hashedPassword })
+    const user = new User({ username: req.body.username, email: req.body.email, passwordHash: hashedPassword })
 
     user.save(function (err) {
       if (err) console.log(err)
