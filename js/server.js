@@ -10,9 +10,6 @@ const User = require('./data/users.js')
 app.use(express.json())
 
 
-
-const users = []
-
 app.get('/users', async (req, res) => {
   try {
     const users = await User.find()
