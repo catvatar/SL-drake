@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/mybrary', { useNewUrlParser: true })
-mongoose.connection.once('open', () => console.log('not connected'))
+mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true })
+mongoose.connection.once('open', () => console.log('connected'))
 
 const User = require('./data/users.js')
 
@@ -15,7 +15,7 @@ app.get('/users', async (req, res) => {
     const users = await User.find()
     res.json(users)
   } catch {
-    console.log('cought a penis')
+    console.log('cought a penis get')
     res.status(500).send()
   }
 
@@ -27,11 +27,9 @@ app.post('/users/register', async (req, res) => {
 
     const user = new User({ username: req.body.username, email: req.body.email, password: hashedPassword })
 
-    try {
-      const newUser = await user.save()
-    } catch {
-      console.log('cought a penis')
-    }
+    user.save(function (err) {
+      if (err) console.log('cought a penis post')
+    })
 
     res.status(201).send()
   } catch {
