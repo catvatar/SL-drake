@@ -43,7 +43,7 @@ app.post('/users/register', async (req, res) => {
   }
 })
 
-app.login('/users/login', async (req, res) => {
+app.get('/users/login', async (req, res) => {
   const user = users.find(user => user.name = req.body.name)
   if (user == null) {
     return res.status(400).send('Cannot find user')
