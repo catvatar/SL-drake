@@ -32,11 +32,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/users', async (req, res) => {
-  User.findOne({ email: req.body.email }, function (err, result) {
+  User.find(function (err, result) {
     if (err) {
       console.log('cought a penis get');
       res.status(333).send();
-    } else if (!result) {
+    } else if (!result.length) {
       res.send("No such user");
     } else {
       res.json(result);
