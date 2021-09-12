@@ -22,7 +22,7 @@ mongoose.connection.once('open', () => console.log('connected'));
 const User = require('./data/users.js');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }));
 app.use(flash());
 app.use(session({
   secret: process.env.SESSION_SECRET,
