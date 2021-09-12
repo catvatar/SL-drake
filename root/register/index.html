@@ -55,29 +55,31 @@
         <div class="col-lg-9 pt-5 pb-5">
           <h1>SL-DRAKE</h1>
           <h4>Create a new account</h4>
-          <form>
+          <form action="/register" method="POST">
             <div class="form-row my-2">
               <div class="col-lg-9">
-                <input type="login" placeholder="login" class="form-control">
+                <input type="username" id="username" name="username" placeholder="username" class="form-control"
+                  required>
               </div>
             </div>
 
             <div class="form-row my-2">
               <div class="col-lg-9">
-                <input type="email" placeholder="email" class="form-control">
+                <input type="email" id="email" name="email" placeholder="email" class="form-control" required>
               </div>
             </div>
 
             <div class="form-row my-2">
               <div class="col-lg-9">
-                <input type="password" placeholder="password" class="form-control">
+                <input type="password" id="password" name="password" placeholder="password" class="form-control"
+                  required>
               </div>
             </div>
 
 
             <div class="form-row my-3 mb-5">
               <div class="col-lg-9">
-                <button type="button" class="btn1">Login</button>
+                <button type="submit" class="btn1" value="Register">Register</input>
               </div>
             </div>
           </form>
