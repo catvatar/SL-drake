@@ -3,7 +3,16 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express');
+const http = require('http');
+const bodyParser = require('body-parser');
+const helmet = require('helmet');
+const rateLimit = require("express-rate-limit");
 const app = express();
+var server = http.createServer(app);
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+})
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const flash = require('express-flash');
@@ -22,7 +31,10 @@ mongoose.connection.once('open', () => console.log('connected'));
 const User = require('./data/users.js');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(express.static(path.join(__dirname, './public')));
+//app.use(helmet());
+//app.use(limiter);
 app.use(flash());
 app.use(session({
   secret: process.env.SESSION_SECRET,
