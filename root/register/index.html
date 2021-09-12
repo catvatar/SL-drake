@@ -1,13 +1,99 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html lang="en">
 
 <head>
+  <!-- Required meta tags -->
   <meta charset="utf-8">
-  <title>LP-Drake Register Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+  <title>Login</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: rgb(206, 214, 216);
+    }
+
+    .row {
+      background: whitesmoke;
+      border-radius: 30px;
+      box-shadow: 12px 12px 22px gray;
+    }
+
+    .btn1 {
+      border: none;
+      outline: none;
+      height: 50px;
+      width: 100%;
+      background-color: black;
+      color: white;
+      border-radius: 7px;
+      font-weight: bold;
+    }
+
+    .btn1:hover {
+      background-color: white;
+      border: 1px solid;
+      color: black;
+
+    }
+  </style>
 </head>
 
 <body>
-  <p>Register</p>
+  <section class="Form my-5">
+    <div class="container">
+      <div class="row col-lg-6 justify-content-center no-gutters">
+        <div class="col-lg-9 pt-5 pb-5">
+          <h1>SL-DRAKE</h1>
+          <h4>Create a new account</h4>
+          <form>
+            <div class="form-row my-2">
+              <div class="col-lg-9">
+                <input type="login" placeholder="login" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-row my-2">
+              <div class="col-lg-9">
+                <input type="email" placeholder="email" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-row my-2">
+              <div class="col-lg-9">
+                <input type="password" placeholder="password" class="form-control">
+              </div>
+            </div>
+
+
+            <div class="form-row my-3 mb-5">
+              <div class="col-lg-9">
+                <button type="button" class="btn1">Login</button>
+              </div>
+            </div>
+          </form>
+          <a href="../login">Already have an account?</a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+
 </body>
 
 </html>
